@@ -6,7 +6,9 @@ use App\Livewire\AnalyticsDashboard;
 use App\Livewire\AuthPage;
 use App\Livewire\CategoryManager;
 use App\Livewire\CategoryPostList;
+use App\Livewire\CommunityManager;
 use App\Livewire\CreatePost;
+use App\Livewire\EditCommunity;
 use App\Livewire\CreateProperty;
 use App\Livewire\EditPost;
 use App\Livewire\EditProperty;
@@ -18,6 +20,7 @@ use App\Livewire\PostList;
 use App\Livewire\PropertyListing;
 use App\Livewire\PropertyListAdmin;
 use App\Livewire\PropertyDetail;
+use App\Livewire\ShowCommunity;
 use App\Livewire\ShowPost;
 use App\Livewire\SubscriberList;
 use Illuminate\Support\Facades\Route;
@@ -40,6 +43,7 @@ Route::get('/affordability-calculator', AffordabilityCalculator::class);
 Route::get('/blog', PostList::class);
 Route::get('/blog/{post:slug}', ShowPost::class);
 Route::get('/news/{category:slug}', CategoryPostList::class);
+Route::get('/communities/{community:slug}', ShowCommunity::class);
 
 // Redis test route
 Route::get('/redis-test', function () {
@@ -83,5 +87,7 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('/admin/property/{property}/edit', EditProperty::class);
     Route::get('/admin/mls-providers', MlsManager::class);
     Route::get('/admin/subscribers', SubscriberList::class);
+    Route::get('/admin/communities', CommunityManager::class);
+    Route::get('/admin/communities/{community:slug}/edit', EditCommunity::class);
 });
 

@@ -218,4 +218,30 @@ class GeminiService
             return null;
         }
     }
+
+    public function generateCommunityStats(string $communityName): string
+    {
+        $prompt = "Generate detailed statistical and demographic information for the community of {$communityName}, formatted in clean HTML. Include population data, median income, age demographics, education levels, housing statistics, and other relevant community metrics. Format this as professional, readable HTML with proper headings and structure.";
+
+        $response = Http::post("{$this->baseUrl}/query", ['prompt' => $prompt]);
+
+        if ($response->successful()) {
+            return $response->json('response', 'Error: Could not generate community statistics.');
+        }
+
+        return 'Error: Failed to connect to the AI service.';
+    }
+
+    public function generateCommunityEvents(string $communityName): string
+    {
+        $prompt = "Generate a list of community events happening in {$communityName} for the current month, formatted as an HTML unordered list. Include a variety of events such as local festivals, farmers markets, community meetings, recreational activities, cultural events, and family-friendly activities. Make the events realistic and engaging for community members.";
+
+        $response = Http::post("{$this->baseUrl}/query", ['prompt' => $prompt]);
+
+        if ($response->successful()) {
+            return $response->json('response', 'Error: Could not generate community events.');
+        }
+
+        return 'Error: Failed to connect to the AI service.';
+    }
 }
