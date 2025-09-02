@@ -1,0 +1,10 @@
+<?php
+
+use App\Livewire\PropertyListing;
+use Illuminate\Support\Facades\Route;
+
+Route::get('/', function () {
+    return view('welcome');
+});
+
+Route::get('/properties', PropertyListing::class);

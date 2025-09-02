@@ -1,0 +1,48 @@
+@props(['property'])
+
+<a href="/property/{{ $property->id }}" class="block">
+    <div class="bg-white rounded-lg overflow-hidden shadow-lg hover:shadow-2xl transition-shadow duration-300 ease-in-out group">
+        <!-- Image and Badge Container -->
+        <div class="relative">
+            <div class="h-56 overflow-hidden">
+                @if($property->image)
+                    <img class="w-full h-full object-cover transition-transform duration-300 ease-in-out group-hover:scale-105" 
+                         src="{{ $property->image }}" 
+                         alt="{{ $property->title }}">
+                @else
+                    <img class="w-full h-full object-cover transition-transform duration-300 ease-in-out group-hover:scale-105" 
+                         src="https://images.unsplash.com/photo-1568605114967-8130f3a36994?q=80&w=2070&auto=format&fit=crop" 
+                         alt="Property placeholder">
+                @endif
+            </div>
+            @if($property->is_featured)
+                <div class="absolute top-4 left-4">
+                    <span class="bg-red-500 text-white text-xs font-semibold px-3 py-1 rounded-full uppercase tracking-wider">Featured</span>
+                </div>
+            @endif
+        </div>
+        
+        <!-- Card Content -->
+        <div class="p-6">
+            <h3 class="text-xl font-bold text-gray-800 truncate">{{ $property->title }}</h3>
+            <p class="text-2xl font-semibold text-indigo-600 mt-2">${{ number_format($property->price) }}</p>
+            <div class="flex items-center mt-4 text-gray-600">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5 mr-2 text-gray-400">
+                    <path fill-rule="evenodd" d="M9.69 18.933l.003.001C9.89 19.02 10 19 10 19s.11.02.308-.066l.002-.001.006-.003.018-.008a5.741 5.741 0 00.281-.14c.186-.1.4-.24.635-.431l.002-.002a7.18 7.18 0 002.433-2.31.75.75 0 00-1.06-1.06 5.682 5.682 0 01-1.74-1.657l-.002-.004A5.717 5.717 0 0010 12c-1.392 0-2.675.52-3.626 1.378l-.004.004a5.68 5.68 0 01-1.74 1.657.75.75 0 101.06 1.06 7.18 7.18 0 002.434 2.309l.002.002c.234.191.449.331.635.431.097.05.192.098.28.14l.018.008.006.003zM10 8a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd" />
+                </svg>
+                <span class="text-sm">{{ $property->location }}</span>
+            </div>
+            
+            @if($property->description)
+                <p class="text-gray-600 text-sm mt-3 line-clamp-2">{{ Str::limit($property->description, 80) }}</p>
+            @endif
+            
+            <div class="mt-4 pt-4 border-t border-gray-100 flex justify-between items-center text-sm text-gray-500">
+                <span class="capitalize">{{ $property->type }}</span>
+                @if($property->bedrooms || $property->bathrooms)
+                    <span>{{ $property->bedrooms ?? 0 }} bed • {{ $property->bathrooms ?? 0 }} bath</span>
+                @endif
+            </div>
+        </div>
+    </div>
+</a>

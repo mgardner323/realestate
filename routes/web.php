@@ -1,7 +1,85 @@
 <?php
 
+use App\Livewire\AdminDashboard;
+use App\Livewire\AffordabilityCalculator;
+use App\Livewire\AnalyticsDashboard;
+use App\Livewire\AuthPage;
+use App\Livewire\CategoryManager;
+use App\Livewire\CreatePost;
+use App\Livewire\CreateProperty;
+use App\Livewire\EditPost;
+use App\Livewire\EditProperty;
+use App\Livewire\Home;
+use App\Http\Controllers\InstallationController;
+use App\Livewire\MlsManager;
+use App\Livewire\MortgageCalculator;
+use App\Livewire\PostList;
+use App\Livewire\PropertyListing;
+use App\Livewire\PropertyListAdmin;
+use App\Livewire\PropertyDetail;
+use App\Livewire\ShowPost;
+use App\Livewire\SubscriberList;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Cache;
 
-Route::get('/', function () {
-    return view('welcome');
+Route::get('/', Home::class);
+
+// Installation wizard routes (only accessible when not installed)  
+Route::get('/install', [App\Http\Controllers\InstallationController::class, 'show'])->name('install');
+Route::post('/install', [App\Http\Controllers\InstallationController::class, 'process'])->name('install.process');
+
+// Authentication routes
+Route::get('/login', AuthPage::class)->name('login');
+Route::get('/register', AuthPage::class)->name('register');
+
+Route::get('/properties', PropertyListing::class);
+Route::get('/property/{property}', PropertyDetail::class);
+Route::get('/mortgage-calculator', MortgageCalculator::class);
+Route::get('/affordability-calculator', AffordabilityCalculator::class);
+Route::get('/blog', PostList::class);
+Route::get('/blog/{post:slug}', ShowPost::class);
+
+// Redis test route
+Route::get('/redis-test', function () {
+    try {
+        // Test Redis connection
+        $testValue = 'redis_test_' . time();
+        Cache::put('test_key', $testValue, 60);
+        $retrieved = Cache::get('test_key');
+        
+        $result = [
+            'redis_connection' => $retrieved === $testValue ? 'SUCCESS' : 'FAILED',
+            'test_value' => $testValue,
+            'retrieved_value' => $retrieved,
+        ];
+        
+        // Test featured properties cache
+        $featuredCache = Cache::get('featured_properties');
+        $result['featured_cache'] = $featuredCache ? count($featuredCache) . ' items found' : 'not found';
+        
+        // Clean up
+        Cache::forget('test_key');
+        
+        return response()->json($result);
+    } catch (Exception $e) {
+        return response()->json([
+            'error' => $e->getMessage()
+        ], 500);
+    }
 });
+
+// Admin routes with middleware protection
+Route::middleware(['auth', 'admin'])->group(function () {
+    Route::get('/admin/dashboard', AdminDashboard::class);
+    Route::get('/admin/analytics', AnalyticsDashboard::class);
+    Route::get('/admin/properties', PropertyListAdmin::class);
+    Route::get('/admin/properties/create', CreateProperty::class);
+    Route::get('/admin/blog', PostList::class);
+    Route::get('/admin/blog/create', CreatePost::class);
+    Route::get('/admin/blog/categories', CategoryManager::class);
+    Route::get('/admin/blog/{post}/edit', EditPost::class);
+    Route::get('/admin/property/{property}/edit', EditProperty::class);
+    Route::get('/admin/mls-providers', MlsManager::class);
+    Route::get('/admin/subscribers', SubscriberList::class);
+});
+

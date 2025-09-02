@@ -7,8 +7,16 @@
     "license": "MIT",
     "require": {
         "php": "^8.2",
+        "elasticsearch/elasticsearch": "^9.1",
+        "google/cloud-ai-platform": "*",
+        "kreait/laravel-firebase": "^6.1",
         "laravel/framework": "^12.0",
-        "laravel/tinker": "^2.10.1"
+        "laravel/sanctum": "^4.2",
+        "laravel/scout": "^10.19",
+        "laravel/tinker": "^2.10.1",
+        "livewire/livewire": "^3.6",
+        "predis/predis": "^3.2",
+        "symfony/postmark-mailer": "*"
     },
     "require-dev": {
         "fakerphp/faker": "^1.23",
