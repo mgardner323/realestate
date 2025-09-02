@@ -5,6 +5,7 @@ use App\Livewire\AffordabilityCalculator;
 use App\Livewire\AnalyticsDashboard;
 use App\Livewire\AuthPage;
 use App\Livewire\CategoryManager;
+use App\Livewire\CategoryPostList;
 use App\Livewire\CreatePost;
 use App\Livewire\CreateProperty;
 use App\Livewire\EditPost;
@@ -38,6 +39,7 @@ Route::get('/mortgage-calculator', MortgageCalculator::class);
 Route::get('/affordability-calculator', AffordabilityCalculator::class);
 Route::get('/blog', PostList::class);
 Route::get('/blog/{post:slug}', ShowPost::class);
+Route::get('/news/{category:slug}', CategoryPostList::class);
 
 // Redis test route
 Route::get('/redis-test', function () {

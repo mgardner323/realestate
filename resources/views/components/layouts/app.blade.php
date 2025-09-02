@@ -7,6 +7,9 @@
         @vite(['resources/css/app.css', 'resources/js/app.js'])
         @livewireStyles
         
+        <!-- Alpine.js -->
+        <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+        
         <!-- Firebase SDK -->
         <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js" defer></script>
         <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js" defer></script>
