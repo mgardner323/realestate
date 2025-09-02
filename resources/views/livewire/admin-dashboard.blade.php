@@ -26,6 +26,12 @@
             <a href="/admin/blog/create" class="block py-2.5 px-4 rounded transition duration-200 hover:bg-gray-700">
                 Create Post
             </a>
+            <a href="/admin/communities" class="block py-2.5 px-4 rounded transition duration-200 hover:bg-gray-700">
+                Communities
+            </a>
+            <a href="/admin/settings" class="block py-2.5 px-4 rounded transition duration-200 hover:bg-gray-700">
+                Site Settings
+            </a>
         </nav>
     </aside>
 

@@ -22,6 +22,8 @@ class ComposerServiceProvider extends ServiceProvider
         view()->composer('*', function ($view) {
             $view->with('categories', \App\Models\Category::all());
             $view->with('communities', \App\Models\Community::where('is_published', true)->get());
+            $view->with('logoPath', \App\Models\Setting::get('logo_path'));
+            $view->with('heroPath', \App\Models\Setting::get('hero_media_path'));
         });
     }
 }

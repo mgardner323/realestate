@@ -22,6 +22,7 @@ use App\Livewire\PropertyListAdmin;
 use App\Livewire\PropertyDetail;
 use App\Livewire\ShowCommunity;
 use App\Livewire\ShowPost;
+use App\Livewire\SiteSettings;
 use App\Livewire\SubscriberList;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Cache;
@@ -89,5 +90,6 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('/admin/subscribers', SubscriberList::class);
     Route::get('/admin/communities', CommunityManager::class);
     Route::get('/admin/communities/{community:slug}/edit', EditCommunity::class);
+    Route::get('/admin/settings', SiteSettings::class);
 });
 

@@ -5,7 +5,13 @@
         <nav class="container mx-auto px-6 py-4">
             <div class="flex items-center justify-between">
                 <div class="text-2xl font-bold text-gray-800">
-                    <a href="/">RealtyCo</a>
+                    <a href="/" class="flex items-center">
+                        @if($logoPath)
+                            <img src="{{ asset($logoPath) }}" alt="Company Logo" class="h-8 max-w-32 object-contain">
+                        @else
+                            RealtyCo
+                        @endif
+                    </a>
                 </div>
                 <div class="hidden md:flex items-center space-x-8">
                     <a href="#" class="text-gray-600 hover:text-indigo-600 transition-colors">Buy</a>
@@ -132,7 +138,27 @@
     <!-- Main Content -->
     <main>
         <!-- Hero Section -->
-        <section class="relative h-[70vh] bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1568605114967-8130f3a36994?q=80&w=2070&auto=format&fit=crop');">
+        <section class="relative h-[70vh] bg-cover bg-center
+            @if($heroPath && str_ends_with($heroPath, '.mp4'))
+                bg-black
+            @elseif($heroPath)
+                bg-black
+            @else
+                bg-black
+            @endif
+        " 
+        @if($heroPath && !str_ends_with($heroPath, '.mp4'))
+            style="background-image: url('{{ asset($heroPath) }}');"
+        @elseif(!$heroPath)
+            style="background-image: url('https://images.unsplash.com/photo-1568605114967-8130f3a36994?q=80&w=2070&auto=format&fit=crop');"
+        @endif
+        >
+            @if($heroPath && str_ends_with($heroPath, '.mp4'))
+                <video autoplay muted loop class="absolute inset-0 w-full h-full object-cover">
+                    <source src="{{ asset($heroPath) }}" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            @endif
             <div class="absolute inset-0 bg-black bg-opacity-50"></div>
             <div class="relative container mx-auto px-6 h-full flex flex-col items-center justify-center text-center text-white">
                 <h1 class="text-4xl md:text-6xl font-bold leading-tight" style="text-shadow: 0 2px 4px rgba(0,0,0,0.4);">Find Your Dream Home</h1>
