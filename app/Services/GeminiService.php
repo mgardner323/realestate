@@ -244,4 +244,17 @@ class GeminiService
 
         return 'Error: Failed to connect to the AI service.';
     }
+
+    public function enhanceText(string $text): string
+    {
+        $prompt = "Please rewrite the following text to be more professional, engaging, and suitable for a real estate agency's About Us page. Make it sound trustworthy, experienced, and customer-focused while maintaining the original meaning and key information. The text should inspire confidence in potential clients and highlight expertise in real estate services.\n\nOriginal text: {$text}";
+
+        $response = Http::post("{$this->baseUrl}/query", ['prompt' => $prompt]);
+
+        if ($response->successful()) {
+            return $response->json('response', 'Error: Could not enhance text.');
+        }
+
+        return 'Error: Failed to connect to the AI service.';
+    }
 }

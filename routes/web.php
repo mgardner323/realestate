@@ -1,5 +1,6 @@
 <?php
 
+use App\Livewire\AboutPageManager;
 use App\Livewire\AdminDashboard;
 use App\Livewire\AffordabilityCalculator;
 use App\Livewire\AnalyticsDashboard;
@@ -20,6 +21,7 @@ use App\Livewire\PostList;
 use App\Livewire\PropertyListing;
 use App\Livewire\PropertyListAdmin;
 use App\Livewire\PropertyDetail;
+use App\Livewire\ShowAboutPage;
 use App\Livewire\ShowCommunity;
 use App\Livewire\ShowPost;
 use App\Livewire\SiteSettings;
@@ -28,6 +30,9 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Cache;
 
 Route::get('/', Home::class);
+Route::get('/dashboard', function() {
+    return redirect('/admin/dashboard');
+})->name('dashboard');
 
 // Installation wizard routes (only accessible when not installed)  
 Route::get('/install', [App\Http\Controllers\InstallationController::class, 'show'])->name('install');
@@ -45,6 +50,7 @@ Route::get('/blog', PostList::class);
 Route::get('/blog/{post:slug}', ShowPost::class);
 Route::get('/news/{category:slug}', CategoryPostList::class);
 Route::get('/communities/{community:slug}', ShowCommunity::class);
+Route::get('/about', ShowAboutPage::class);
 
 // Redis test route
 Route::get('/redis-test', function () {
@@ -91,5 +97,6 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('/admin/communities', CommunityManager::class);
     Route::get('/admin/communities/{community:slug}/edit', EditCommunity::class);
     Route::get('/admin/settings', SiteSettings::class);
+    Route::get('/admin/about', AboutPageManager::class);
 });
 

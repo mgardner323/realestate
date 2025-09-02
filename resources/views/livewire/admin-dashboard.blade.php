@@ -32,6 +32,9 @@
             <a href="/admin/settings" class="block py-2.5 px-4 rounded transition duration-200 hover:bg-gray-700">
                 Site Settings
             </a>
+            <a href="/admin/about" class="block py-2.5 px-4 rounded transition duration-200 hover:bg-gray-700">
+                About Us Page
+            </a>
         </nav>
     </aside>
 

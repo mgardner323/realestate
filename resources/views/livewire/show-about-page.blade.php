@@ -18,7 +18,7 @@
                     <a href="#" class="text-gray-600 hover:text-indigo-600 transition-colors">Sell</a>
                     <a href="#" class="text-gray-600 hover:text-indigo-600 transition-colors">Rent</a>
                     <a href="/properties" class="text-gray-600 hover:text-indigo-600 transition-colors">Properties</a>
-                    <a href="/about" class="text-gray-600 hover:text-indigo-600 transition-colors">About</a>
+                    <a href="/about" class="text-gray-600 hover:text-indigo-600 transition-colors font-semibold text-indigo-600">About</a>
                     
                     <!-- News Dropdown -->
                     <div 
@@ -136,83 +136,84 @@
         </nav>
     </header>
 
+    <!-- Page Header -->
+    <section class="bg-gradient-to-r from-indigo-600 to-blue-600 py-16">
+        <div class="container mx-auto px-6 text-center">
+            <h1 class="text-4xl md:text-5xl font-bold text-white mb-4">About Us</h1>
+            <p class="text-xl text-indigo-100 max-w-2xl mx-auto">Get to know the team that's dedicated to helping you find your perfect home</p>
+        </div>
+    </section>
+
     <!-- Main Content -->
-    <main>
-        <!-- Hero Section -->
-        <section class="relative h-[70vh] bg-cover bg-center
-            @if($heroPath && str_ends_with($heroPath, '.mp4'))
-                bg-black
-            @elseif($heroPath)
-                bg-black
-            @else
-                bg-black
-            @endif
-        " 
-        @if($heroPath && !str_ends_with($heroPath, '.mp4'))
-            style="background-image: url('{{ asset($heroPath) }}');"
-        @elseif(!$heroPath)
-            style="background-image: url('https://images.unsplash.com/photo-1568605114967-8130f3a36994?q=80&w=2070&auto=format&fit=crop');"
-        @endif
-        >
-            @if($heroPath && str_ends_with($heroPath, '.mp4'))
-                <video autoplay muted loop class="absolute inset-0 w-full h-full object-cover">
-                    <source src="{{ asset($heroPath) }}" type="video/mp4">
-                    Your browser does not support the video tag.
-                </video>
-            @endif
-            <div class="absolute inset-0 bg-black bg-opacity-50"></div>
-            <div class="relative container mx-auto px-6 h-full flex flex-col items-center justify-center text-center text-white">
-                <h1 class="text-4xl md:text-6xl font-bold leading-tight" style="text-shadow: 0 2px 4px rgba(0,0,0,0.4);">Find Your Dream Home</h1>
-                <p class="mt-4 text-lg md:text-xl text-gray-200 max-w-2xl" style="text-shadow: 0 2px 4px rgba(0,0,0,0.4);">The perfect place to find the property that's right for you. Start your search today.</p>
-                
-                <!-- Search Bar -->
-                <div class="mt-8 w-full max-w-2xl">
-                    <div class="bg-white rounded-full p-2 flex items-center shadow-lg">
-                        <input type="text" placeholder="Enter an address, city, or ZIP code" class="flex-grow p-3 bg-transparent border-none focus:outline-none focus:ring-0 text-gray-800 placeholder-gray-500">
-                        <a href="/properties" class="bg-indigo-600 text-white font-semibold px-8 py-3 rounded-full hover:bg-indigo-700 transition-colors">
-                            Search
-                        </a>
+    <main class="py-16">
+        <div class="container mx-auto px-6">
+            <div class="max-w-4xl mx-auto">
+                <!-- Photo Section -->
+                @if($aboutPhoto)
+                <div class="text-center mb-12">
+                    <div class="relative inline-block">
+                        <img 
+                            src="{{ asset($aboutPhoto) }}" 
+                            alt="About Our Real Estate Agency" 
+                            class="rounded-lg shadow-2xl max-w-full h-auto mx-auto object-cover max-h-96"
+                        >
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent rounded-lg"></div>
                     </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Featured Properties Section -->
-        <section class="py-20">
-            <div class="container mx-auto px-6">
-                <div class="text-center">
-                    <h2 class="text-3xl font-bold text-gray-800">Featured Properties</h2>
-                    <p class="mt-2 text-gray-600">Explore our handpicked selection of premier properties.</p>
-                </div>
-
-                <!-- Properties Grid -->
-                @if($featuredProperties->count() > 0)
-                <div class="mt-12 grid gap-8 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
-                    @foreach($featuredProperties as $property)
-                        <x-property-card :property="$property" />
-                    @endforeach
-                </div>
-                @else
-                <div class="mt-12 text-center">
-                    <p class="text-gray-600">No featured properties available at this time.</p>
                 </div>
                 @endif
 
-                <!-- View All Properties Button -->
-                <div class="mt-12 text-center">
-                    <a href="/properties" class="bg-indigo-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-indigo-700 transition-colors">
-                        View All Properties
-                    </a>
+                <!-- Content Section -->
+                <div class="bg-gray-50 rounded-2xl p-8 md:p-12 shadow-lg">
+                    @if($aboutText)
+                        <div class="prose prose-lg prose-indigo max-w-none text-gray-700 leading-relaxed">
+                            {!! $aboutText !!}
+                        </div>
+                    @else
+                        <div class="text-center py-12">
+                            <div class="bg-white rounded-xl p-8 shadow-sm">
+                                <svg class="mx-auto h-16 w-16 text-indigo-500 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-6m-8 0H3m2 0h6M9 7h6m-6 4h6m-6 4h6m-6 4h6"/>
+                                </svg>
+                                <h2 class="text-2xl font-bold text-gray-900 mb-4">Welcome to Our Real Estate Agency</h2>
+                                <p class="text-gray-600 text-lg max-w-2xl mx-auto">
+                                    We are dedicated to helping you find your dream home. Our experienced team of real estate professionals is committed to providing exceptional service and expertise to guide you through every step of your property journey.
+                                </p>
+                            </div>
+                        </div>
+                    @endif
+                </div>
+
+                <!-- Call to Action Section -->
+                <div class="mt-16 text-center">
+                    <div class="bg-indigo-600 rounded-2xl p-8 text-white">
+                        <h2 class="text-3xl font-bold mb-4">Ready to Find Your Dream Home?</h2>
+                        <p class="text-xl text-indigo-100 mb-8 max-w-2xl mx-auto">
+                            Let our experienced team help you navigate the real estate market and find the perfect property for your needs.
+                        </p>
+                        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                            <a 
+                                href="/properties" 
+                                class="inline-flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-full text-indigo-600 bg-white hover:bg-gray-50 transition-colors duration-200 shadow-lg hover:shadow-xl"
+                            >
+                                <svg class="-ml-1 mr-2 h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2H5a2 2 0 00-2-2V7zm16 0v1H5V7a1 1 0 011-1h12a1 1 0 011 1zM5 11h14" />
+                                </svg>
+                                Browse Properties
+                            </a>
+                            <a 
+                                href="#" 
+                                class="inline-flex items-center justify-center px-8 py-3 border-2 border-white text-base font-medium rounded-full text-white bg-transparent hover:bg-white hover:text-indigo-600 transition-colors duration-200"
+                            >
+                                <svg class="-ml-1 mr-2 h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                                </svg>
+                                Contact Us
+                            </a>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </section>
-
-        <!-- Newsletter Signup Section -->
-        <section class="py-16 bg-gray-100">
-            <div class="container mx-auto px-6">
-                <livewire:newsletter-signup />
-            </div>
-        </section>
+        </div>
     </main>
 
     <!-- Footer -->

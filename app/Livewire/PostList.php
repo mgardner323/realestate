@@ -26,6 +26,10 @@ class PostList extends Component
 
         return view('livewire.post-list', [
             'posts' => $posts,
+            'categories' => \App\Models\Category::all(),
+            'communities' => \App\Models\Community::where('is_published', true)->get(),
+            'logoPath' => \App\Models\Setting::get('logo_path'),
+            'heroPath' => \App\Models\Setting::get('hero_media_path')
         ]);
     }
 }

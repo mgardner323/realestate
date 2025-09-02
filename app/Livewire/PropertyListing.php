@@ -74,7 +74,13 @@ class PropertyListing extends Component
             $properties = $this->propertyRepository->paginate(12);
         }
 
-        return view('livewire.property-listing', ['properties' => $properties]);
+        return view('livewire.property-listing', [
+            'properties' => $properties,
+            'categories' => \App\Models\Category::all(),
+            'communities' => \App\Models\Community::where('is_published', true)->get(),
+            'logoPath' => \App\Models\Setting::get('logo_path'),
+            'heroPath' => \App\Models\Setting::get('hero_media_path')
+        ]);
     }
 
     protected function applyFilters($collection)
