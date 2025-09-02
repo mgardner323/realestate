@@ -168,8 +168,8 @@ class InstallationController extends Controller
                 $rules = [
                     'adminName' => 'required|string|max:255',
                     'adminEmail' => 'required|email|max:255|unique:users,email',
-                    'adminPassword' => 'required|string|min:8|confirmed',
-                    'adminPasswordConfirmation' => 'required',
+                    'adminPassword' => 'required|string|min:8',
+                    'adminPasswordConfirmation' => 'required|same:adminPassword',
                 ];
                 break;
         }
@@ -198,6 +198,7 @@ class InstallationController extends Controller
                 $installation['adminName'] = $request->input('adminName');
                 $installation['adminEmail'] = $request->input('adminEmail');
                 $installation['adminPassword'] = $request->input('adminPassword');
+                $installation['adminPasswordConfirmation'] = $request->input('adminPasswordConfirmation');
                 break;
         }
 

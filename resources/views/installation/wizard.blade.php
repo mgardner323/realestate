@@ -275,10 +275,10 @@
                                 <label for="adminPasswordConfirmation" class="block text-sm font-medium text-gray-700 mb-2">
                                     Confirm Password <span class="text-red-500">*</span>
                                 </label>
-                                <input type="password" name="adminPassword_confirmation" id="adminPasswordConfirmation"
-                                    class="w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors @error('adminPassword_confirmation') border-red-500 @enderror"
+                                <input type="password" name="adminPasswordConfirmation" id="adminPasswordConfirmation"
+                                    class="w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors @error('adminPasswordConfirmation') border-red-500 @enderror"
                                     placeholder="Confirm your password">
-                                @error('adminPassword_confirmation') <span class="text-red-500 text-sm mt-1 block">{{ $message }}</span> @enderror
+                                @error('adminPasswordConfirmation') <span class="text-red-500 text-sm mt-1 block">{{ $message }}</span> @enderror
                             </div>
                         </div>
 
