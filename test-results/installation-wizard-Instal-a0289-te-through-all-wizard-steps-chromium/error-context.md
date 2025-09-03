@@ -1,0 +1,69 @@
+# Page snapshot
+
+```yaml
+- generic [ref=e3]:
+  - generic [ref=e4]:
+    - img [ref=e7]
+    - heading "Real Estate Platform" [level=1] [ref=e9]
+    - paragraph [ref=e10]: Installation Wizard
+    - paragraph [ref=e11]: Set up your professional real estate platform in just 3 steps
+  - generic [ref=e13]:
+    - generic [ref=e15]:
+      - img [ref=e17]
+      - heading "Agency Information" [level=3] [ref=e20]
+    - generic [ref=e22]:
+      - generic [ref=e24]: "2"
+      - heading "Branding & SEO" [level=3] [ref=e26]
+    - generic [ref=e28]:
+      - generic [ref=e30]: "3"
+      - heading "Admin Account" [level=3] [ref=e32]
+  - generic [ref=e34]:
+    - img [ref=e36]
+    - paragraph [ref=e39]: Step completed successfully!
+  - generic [ref=e41]:
+    - generic [ref=e42]:
+      - generic [ref=e43]:
+        - heading "Branding & SEO" [level=2] [ref=e44]
+        - paragraph [ref=e45]: Customize your platform's appearance and search engine optimization
+      - generic [ref=e46]:
+        - generic [ref=e47]:
+          - generic [ref=e48]:
+            - text: Primary Brand Color
+            - generic [ref=e49]: "*"
+          - generic [ref=e50]:
+            - textbox "Primary Brand Color *" [ref=e51]: "#3b82f6"
+            - textbox "#3B82F6" [ref=e52]
+        - generic [ref=e53]:
+          - generic [ref=e54]:
+            - text: Secondary Brand Color
+            - generic [ref=e55]: "*"
+          - generic [ref=e56]:
+            - textbox "Secondary Brand Color *" [ref=e57]: "#1e40af"
+            - textbox "#1E40AF" [ref=e58]
+        - generic [ref=e59]:
+          - generic [ref=e60]:
+            - text: SEO Title
+            - generic [ref=e61]: "*"
+          - textbox "SEO Title *" [ref=e62]: Premium Real Estate Platform
+          - paragraph [ref=e63]: This will appear in browser tabs and search results
+        - generic [ref=e64]:
+          - generic [ref=e65]:
+            - text: SEO Description
+            - generic [ref=e66]: "*"
+          - textbox "SEO Description *" [ref=e67]: Find your dream property with our comprehensive real estate platform featuring advanced search, analytics, and modern design.
+          - paragraph [ref=e68]: This description will appear in search engine results
+      - generic [ref=e69]:
+        - heading "Color Preview" [level=3] [ref=e70]
+        - generic [ref=e71]:
+          - generic [ref=e73]: Primary
+          - generic [ref=e75]: Secondary
+    - generic [ref=e76]:
+      - button "Previous" [ref=e78]:
+        - img [ref=e79]
+        - text: Previous
+      - generic [ref=e81]:
+        - generic [ref=e82]: Step 2 of 3
+        - button "Next Step" [ref=e83]:
+          - text: Next Step
+          - img [ref=e84]
+```

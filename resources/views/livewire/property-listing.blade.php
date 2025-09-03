@@ -20,6 +20,76 @@
                     <a href="/properties" class="text-gray-600 hover:text-indigo-600 transition-colors font-semibold text-indigo-600">Properties</a>
                     <a href="/about" class="text-gray-600 hover:text-indigo-600 transition-colors">About</a>
                     
+                    <!-- Calculators Dropdown -->
+                    <div 
+                        x-data="{ open: false }" 
+                        @mouseenter="open = true" 
+                        @mouseleave="open = false" 
+                        class="relative"
+                    >
+                        <!-- Dropdown Trigger Button -->
+                        <button 
+                            @click="open = !open" 
+                            class="flex items-center text-gray-600 hover:text-indigo-600 transition-colors focus:outline-none"
+                        >
+                            <span>Calculators</span>
+                            <!-- Arrow Icon -->
+                            <svg class="ml-1 h-4 w-4 transform transition-transform duration-200" 
+                                 :class="{'rotate-180': open}" 
+                                 xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                                <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                            </svg>
+                        </button>
+
+                        <!-- Dropdown Panel -->
+                        <div 
+                            x-show="open" 
+                            x-transition:enter="transition ease-out duration-200"
+                            x-transition:enter-start="opacity-0 transform scale-95"
+                            x-transition:enter-end="opacity-100 transform scale-100"
+                            x-transition:leave="transition ease-in duration-150"
+                            x-transition:leave-start="opacity-100 transform scale-100"
+                            x-transition:leave-end="opacity-0 transform scale-95"
+                            class="absolute z-10 right-0 mt-2 w-64 origin-top-right bg-white rounded-md shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
+                            style="display: none;"
+                        >
+                            <div class="py-1" role="menu" aria-orientation="vertical">
+                                <!-- Mortgage Calculator -->
+                                <a href="/mortgage-calculator" class="flex items-center px-4 py-3 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900" role="menuitem">
+                                    <svg class="h-6 w-6 mr-3 text-indigo-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 6l3 1m0 0l-3 9a5.002 5.002 0 006.001 0M6 7l3 9M6 7l6-2m6 2l3-1m-3 1l-3 9a5.002 5.002 0 006.001 0M18 7l3 9m-3-9l-6-2m0-2v2m0 16V5m0 16H9m3 0h3" />
+                                    </svg>
+                                    <div>
+                                        <p class="font-medium">Mortgage Calculator</p>
+                                        <p class="text-xs text-gray-500">Estimate your monthly payments</p>
+                                    </div>
+                                </a>
+                                
+                                <!-- Affordability Calculator -->
+                                <a href="/affordability-calculator" class="flex items-center px-4 py-3 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900" role="menuitem">
+                                    <svg class="h-6 w-6 mr-3 text-indigo-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 14v3m4-3v3m4-3v3M3 21h18M3 10h18M3 7l9-4 9 4M4 10h16v11H4V10z" />
+                                    </svg>
+                                    <div>
+                                        <p class="font-medium">Affordability Calculator</p>
+                                        <p class="text-xs text-gray-500">Find out how much house you can afford</p>
+                                    </div>
+                                </a>
+                                
+                                <!-- Refinance Calculator -->
+                                <a href="/refinance-calculator" class="flex items-center px-4 py-3 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900" role="menuitem">
+                                    <svg class="h-6 w-6 mr-3 text-indigo-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M9 15L3 9m0 0l6-6M3 9h12a6 6 0 010 12h-3" />
+                                    </svg>
+                                    <div>
+                                        <p class="font-medium">Refinance Calculator</p>
+                                        <p class="text-xs text-gray-500">See if refinancing is right for you</p>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    
                     <!-- News Dropdown -->
                     <div 
                         x-data="{ open: false }" 

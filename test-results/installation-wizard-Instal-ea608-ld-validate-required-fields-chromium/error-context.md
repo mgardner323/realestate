@@ -27,21 +27,23 @@
           - generic [ref=e40]:
             - text: Agency Name
             - generic [ref=e41]: "*"
-          - textbox "Agency Name *" [ref=e42]: Real Estate Agency
-        - generic [ref=e43]:
-          - generic [ref=e44]:
+          - textbox "Agency Name *" [ref=e42]
+          - generic [ref=e43]: The agency name field is required.
+        - generic [ref=e44]:
+          - generic [ref=e45]:
             - text: Email Address
-            - generic [ref=e45]: "*"
-          - textbox "Email Address *" [ref=e46]: info@realestate.com
-        - generic [ref=e47]:
-          - generic [ref=e48]: Phone Number
-          - textbox "Phone Number" [ref=e49]
-        - generic [ref=e50]:
-          - generic [ref=e51]: Business Address
-          - textbox "Business Address" [ref=e52]
-    - generic [ref=e54]:
-      - generic [ref=e55]: Step 1 of 3
-      - button "Next Step" [ref=e56] [cursor=pointer]:
+            - generic [ref=e46]: "*"
+          - textbox "Email Address *" [ref=e47]
+          - generic [ref=e48]: The agency email field is required.
+        - generic [ref=e49]:
+          - generic [ref=e50]: Phone Number
+          - textbox "Phone Number" [ref=e51]
+        - generic [ref=e52]:
+          - generic [ref=e53]: Business Address
+          - textbox "Business Address" [ref=e54]
+    - generic [ref=e56]:
+      - generic [ref=e57]: Step 1 of 3
+      - button "Next Step" [ref=e58]:
         - text: Next Step
-        - img [ref=e57] [cursor=pointer]
+        - img [ref=e59]
 ```

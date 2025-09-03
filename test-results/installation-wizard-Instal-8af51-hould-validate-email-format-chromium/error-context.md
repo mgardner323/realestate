@@ -1,0 +1,47 @@
+# Page snapshot
+
+```yaml
+- generic [ref=e3]:
+  - generic [ref=e4]:
+    - img [ref=e7]
+    - heading "Real Estate Platform" [level=1] [ref=e9]
+    - paragraph [ref=e10]: Installation Wizard
+    - paragraph [ref=e11]: Set up your professional real estate platform in just 3 steps
+  - generic [ref=e13]:
+    - generic [ref=e15]:
+      - generic [ref=e17]: "1"
+      - heading "Agency Information" [level=3] [ref=e19]
+    - generic [ref=e22]:
+      - generic [ref=e24]: "2"
+      - heading "Branding & SEO" [level=3] [ref=e26]
+    - generic [ref=e29]:
+      - generic [ref=e31]: "3"
+      - heading "Admin Account" [level=3] [ref=e33]
+  - generic [ref=e35]:
+    - generic [ref=e36]:
+      - generic [ref=e37]:
+        - heading "Agency Information" [level=2] [ref=e38]
+        - paragraph [ref=e39]: Tell us about your real estate agency
+      - generic [ref=e40]:
+        - generic [ref=e41]:
+          - generic [ref=e42]:
+            - text: Agency Name
+            - generic [ref=e43]: "*"
+          - textbox "Agency Name *" [ref=e44]: Test Agency
+        - generic [ref=e45]:
+          - generic [ref=e46]:
+            - text: Email Address
+            - generic [ref=e47]: "*"
+          - textbox "Email Address *" [active] [ref=e48]: invalid-email
+        - generic [ref=e49]:
+          - generic [ref=e50]: Phone Number
+          - textbox "Phone Number" [ref=e51]
+        - generic [ref=e52]:
+          - generic [ref=e53]: Business Address
+          - textbox "Business Address" [ref=e54]
+    - generic [ref=e56]:
+      - generic [ref=e57]: Step 1 of 3
+      - button "Next Step" [ref=e58] [cursor=pointer]:
+        - text: Next Step
+        - img [ref=e59] [cursor=pointer]
+```
