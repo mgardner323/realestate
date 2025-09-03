@@ -15,11 +15,28 @@ class AuthPage extends Component
     public function mount()
     {
         // Determine view state based on current route
-        if (request()->routeIs('register')) {
+        if (request()->routeIs('register') || request()->routeIs('register.post')) {
             $this->view = 'register';
         } else {
             $this->view = 'login';
         }
+        
+        // Handle POST fallback when JavaScript is disabled
+        if (request()->isMethod('POST')) {
+            $this->handleFallbackAuth();
+        }
+    }
+    
+    /**
+     * Handle authentication fallback when JavaScript is disabled
+     */
+    private function handleFallbackAuth()
+    {
+        // Set error message for display
+        session()->flash('error', 'JavaScript is required for authentication. Please enable JavaScript and try again.');
+        
+        // The component will automatically render with the error message
+        // No redirect needed as we're already handling the POST request
     }
 
     public function verifyToken(string $token)

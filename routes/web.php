@@ -40,7 +40,9 @@ Route::post('/install', [App\Http\Controllers\InstallationController::class, 'pr
 
 // Authentication routes
 Route::get('/login', AuthPage::class)->name('login');
+Route::post('/login', AuthPage::class)->name('login.post');
 Route::get('/register', AuthPage::class)->name('register');
+Route::post('/register', AuthPage::class)->name('register.post');
 Route::post('/logout', function() {
     auth()->logout();
     return redirect('/');
