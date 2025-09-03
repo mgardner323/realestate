@@ -60,11 +60,18 @@ class InstallationWizard extends Component
 
     public function mount()
     {
-        // Initialize with default values for real estate platform
-        $this->agencyName = 'Real Estate Agency';
-        $this->agencyEmail = 'info@realestate.com';
-        $this->seoTitle = 'Premium Real Estate Platform';
-        $this->seoDescription = 'Find your dream property with our comprehensive real estate platform featuring advanced search, analytics, and modern design.';
+        // Load data from session if available
+        $sessionData = session('wizard_data', []);
+        
+        // Initialize with session data or default values
+        $this->agencyName = $sessionData['agencyName'] ?? 'Real Estate Agency';
+        $this->agencyEmail = $sessionData['agencyEmail'] ?? 'info@realestate.com';
+        $this->agencyPhone = $sessionData['agencyPhone'] ?? '';
+        $this->agencyAddress = $sessionData['agencyAddress'] ?? '';
+        $this->brandPrimaryColor = $sessionData['brandPrimaryColor'] ?? '#3B82F6';
+        $this->brandSecondaryColor = $sessionData['brandSecondaryColor'] ?? '#1E40AF';
+        $this->seoTitle = $sessionData['seoTitle'] ?? 'Premium Real Estate Platform';
+        $this->seoDescription = $sessionData['seoDescription'] ?? 'Find your dream property with our comprehensive real estate platform featuring advanced search, analytics, and modern design.';
     }
 
     public function submitCurrentStep()
@@ -80,7 +87,55 @@ class InstallationWizard extends Component
 
     public function nextStep()
     {
-        // Just advance the step without validation for now
+        // Debug: Log current component state
+        logger()->info('nextStep called', [
+            'currentStep' => $this->currentStep,
+            'agencyName' => $this->agencyName,
+            'agencyEmail' => $this->agencyEmail,
+            'seoTitle' => $this->seoTitle,
+        ]);
+        
+        // Validate and save current step data to session
+        $this->validateCurrentStep();
+        
+        // Get current wizard data from session
+        $currentData = session('wizard_data', []);
+        
+        // Prepare data based on current step
+        $validatedData = [];
+        
+        if ($this->currentStep == 1) {
+            $validatedData = [
+                'agencyName' => $this->agencyName,
+                'agencyEmail' => $this->agencyEmail,
+                'agencyPhone' => $this->agencyPhone,
+                'agencyAddress' => $this->agencyAddress,
+            ];
+        } elseif ($this->currentStep == 2) {
+            $validatedData = [
+                'brandPrimaryColor' => $this->brandPrimaryColor,
+                'brandSecondaryColor' => $this->brandSecondaryColor,
+                'seoTitle' => $this->seoTitle,
+                'seoDescription' => $this->seoDescription,
+            ];
+        }
+        
+        // Debug: Log what we're saving
+        logger()->info('Saving wizard data to session', [
+            'currentData' => $currentData,
+            'validatedData' => $validatedData,
+        ]);
+        
+        // Merge with existing session data
+        $mergedData = array_merge($currentData, $validatedData);
+        session(['wizard_data' => $mergedData]);
+        
+        // Debug: Verify session save
+        logger()->info('Session data after save', [
+            'sessionData' => session('wizard_data'),
+        ]);
+        
+        // Advance to next step
         if ($this->currentStep < $this->totalSteps) {
             $this->currentStep++;
         }
@@ -95,14 +150,27 @@ class InstallationWizard extends Component
 
     public function validateCurrentStep()
     {
-        // Simplified validation to prevent PHP errors
         if ($this->currentStep == 1) {
             $this->validate([
                 'agencyName' => 'required|string|max:255',
-                'agencyEmail' => 'required|email|max:255'
+                'agencyEmail' => 'required|email|max:255',
+                'agencyPhone' => 'nullable|string|max:50',
+                'agencyAddress' => 'nullable|string|max:500',
+            ]);
+        } elseif ($this->currentStep == 2) {
+            $this->validate([
+                'brandPrimaryColor' => 'required|string|regex:/^#[A-Fa-f0-9]{6}$/',
+                'brandSecondaryColor' => 'required|string|regex:/^#[A-Fa-f0-9]{6}$/',
+                'seoTitle' => 'required|string|max:255',
+                'seoDescription' => 'required|string|max:500',
+            ]);
+        } elseif ($this->currentStep == 3) {
+            $this->validate([
+                'adminName' => 'required|string|max:255',
+                'adminEmail' => 'required|email|max:255',
+                'adminPassword' => 'required|string|min:8|confirmed',
             ]);
         }
-        // Skip validation for other steps for now
     }
 
     public function finish()
@@ -180,7 +248,9 @@ class InstallationWizard extends Component
 
     public function render()
     {
-        return view('livewire.installation-wizard')
-            ->layout('components.layouts.minimal');
+        $summaryData = session('wizard_data', []);
+        return view('livewire.installation-wizard', [
+            'summaryData' => $summaryData
+        ])->layout('components.layouts.minimal');
     }
 }

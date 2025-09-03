@@ -235,19 +235,43 @@
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
                                 <div>
                                     <span class="font-medium text-blue-800">Agency:</span>
-                                    <span class="text-blue-600">{{ $agencyName }}</span>
+                                    <span class="text-blue-600">{{ $summaryData['agencyName'] ?? 'Not Set' }}</span>
                                 </div>
                                 <div>
                                     <span class="font-medium text-blue-800">Email:</span>
-                                    <span class="text-blue-600">{{ $agencyEmail }}</span>
+                                    <span class="text-blue-600">{{ $summaryData['agencyEmail'] ?? 'Not Set' }}</span>
+                                </div>
+                                <div>
+                                    <span class="font-medium text-blue-800">Phone:</span>
+                                    <span class="text-blue-600">{{ $summaryData['agencyPhone'] ?? 'Not Set' }}</span>
+                                </div>
+                                <div>
+                                    <span class="font-medium text-blue-800">Address:</span>
+                                    <span class="text-blue-600">{{ $summaryData['agencyAddress'] ?? 'Not Set' }}</span>
+                                </div>
+                                <div>
+                                    <span class="font-medium text-blue-800">Primary Color:</span>
+                                    <span class="text-blue-600">{{ $summaryData['brandPrimaryColor'] ?? 'Not Set' }}</span>
+                                </div>
+                                <div>
+                                    <span class="font-medium text-blue-800">Secondary Color:</span>
+                                    <span class="text-blue-600">{{ $summaryData['brandSecondaryColor'] ?? 'Not Set' }}</span>
                                 </div>
                                 <div>
                                     <span class="font-medium text-blue-800">SEO Title:</span>
-                                    <span class="text-blue-600">{{ $seoTitle }}</span>
+                                    <span class="text-blue-600">{{ $summaryData['seoTitle'] ?? 'Not Set' }}</span>
                                 </div>
                                 <div>
-                                    <span class="font-medium text-blue-800">Admin:</span>
-                                    <span class="text-blue-600">{{ $adminName }}</span>
+                                    <span class="font-medium text-blue-800">SEO Description:</span>
+                                    <span class="text-blue-600">{{ Str::limit($summaryData['seoDescription'] ?? 'Not Set', 50) }}</span>
+                                </div>
+                                <div>
+                                    <span class="font-medium text-blue-800">Admin Name:</span>
+                                    <span class="text-blue-600">{{ $adminName ?? 'Not Set' }}</span>
+                                </div>
+                                <div>
+                                    <span class="font-medium text-blue-800">Admin Email:</span>
+                                    <span class="text-blue-600">{{ $adminEmail ?? 'Not Set' }}</span>
                                 </div>
                             </div>
                         </div>
