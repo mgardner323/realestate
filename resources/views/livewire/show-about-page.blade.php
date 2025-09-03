@@ -127,10 +127,27 @@
                         </div>
                     </div>
                 </div>
-                <div>
-                    <a href="#" class="bg-indigo-600 text-white px-5 py-2 rounded-full hover:bg-indigo-700 transition-colors">
-                        Contact
-                    </a>
+                <div class="flex items-center space-x-4">
+                    @auth
+                        @if(auth()->user()->isAdmin())
+                            <a href="/admin/dashboard" class="text-gray-600 hover:text-indigo-600 transition-colors">
+                                Admin
+                            </a>
+                        @endif
+                        <form method="POST" action="{{ route('logout') }}" class="inline">
+                            @csrf
+                            <button type="submit" class="bg-gray-600 text-white px-5 py-2 rounded-full hover:bg-gray-700 transition-colors">
+                                Logout
+                            </button>
+                        </form>
+                    @else
+                        <a href="/login" class="text-gray-600 hover:text-indigo-600 transition-colors">
+                            Login
+                        </a>
+                        <a href="/register" class="bg-indigo-600 text-white px-5 py-2 rounded-full hover:bg-indigo-700 transition-colors">
+                            Register
+                        </a>
+                    @endauth
                 </div>
             </div>
         </nav>

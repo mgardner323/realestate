@@ -41,6 +41,10 @@ Route::post('/install', [App\Http\Controllers\InstallationController::class, 'pr
 // Authentication routes
 Route::get('/login', AuthPage::class)->name('login');
 Route::get('/register', AuthPage::class)->name('register');
+Route::post('/logout', function() {
+    auth()->logout();
+    return redirect('/');
+})->name('logout');
 
 Route::get('/properties', PropertyListing::class);
 Route::get('/property/{property}', PropertyDetail::class);

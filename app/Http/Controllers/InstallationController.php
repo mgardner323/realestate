@@ -116,6 +116,16 @@ class InstallationController extends Controller
                 'is_admin' => true,
             ]);
 
+            // Save installation data to settings table
+            \App\Models\Setting::updateOrCreate(['key' => 'agency_name'], ['value' => $installation['agencyName']]);
+            \App\Models\Setting::updateOrCreate(['key' => 'agency_email'], ['value' => $installation['agencyEmail']]);
+            \App\Models\Setting::updateOrCreate(['key' => 'agency_phone'], ['value' => $installation['agencyPhone']]);
+            \App\Models\Setting::updateOrCreate(['key' => 'agency_address'], ['value' => $installation['agencyAddress']]);
+            \App\Models\Setting::updateOrCreate(['key' => 'brand_primary_color'], ['value' => $installation['brandPrimaryColor']]);
+            \App\Models\Setting::updateOrCreate(['key' => 'brand_secondary_color'], ['value' => $installation['brandSecondaryColor']]);
+            \App\Models\Setting::updateOrCreate(['key' => 'seo_title'], ['value' => $installation['seoTitle']]);
+            \App\Models\Setting::updateOrCreate(['key' => 'seo_description'], ['value' => $installation['seoDescription']]);
+
             // Update environment file
             $this->updateEnvironmentFile($installation);
 
