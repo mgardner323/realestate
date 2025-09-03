@@ -40,4 +40,14 @@ return [
         'location' => env('GOOGLE_CLOUD_LOCATION', 'us-central1'),
     ],
 
+    'firebase' => [
+        'api_key' => env('FIREBASE_API_KEY') ?: \App\Models\Setting::get('firebase_api_key'),
+        'auth_domain' => env('FIREBASE_AUTH_DOMAIN') ?: \App\Models\Setting::get('firebase_auth_domain', 'laravel-real-estate-agen-19b83.firebaseapp.com'),
+        'project_id' => env('FIREBASE_PROJECT_ID') ?: \App\Models\Setting::get('firebase_project_id', 'laravel-real-estate-agen-19b83'),
+        'storage_bucket' => env('FIREBASE_STORAGE_BUCKET') ?: \App\Models\Setting::get('firebase_storage_bucket', 'laravel-real-estate-agen-19b83.firebasestorage.app'),
+        'messaging_sender_id' => env('FIREBASE_MESSAGING_SENDER_ID') ?: \App\Models\Setting::get('firebase_messaging_sender_id'),
+        'app_id' => env('FIREBASE_APP_ID') ?: \App\Models\Setting::get('firebase_app_id'),
+        'measurement_id' => env('FIREBASE_MEASUREMENT_ID') ?: \App\Models\Setting::get('firebase_measurement_id'),
+    ],
+
 ];

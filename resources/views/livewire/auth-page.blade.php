@@ -129,12 +129,13 @@
     import { getAuth, GoogleAuthProvider, signInWithPopup, createUserWithEmailAndPassword, sendEmailVerification, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js";
 
     const firebaseConfig = {
-        apiKey: "{{ config('services.firebase.api_key') ?: env('VITE_FIREBASE_API_KEY') }}",
-        authDomain: "{{ config('services.firebase.auth_domain') ?: env('VITE_FIREBASE_AUTH_DOMAIN') }}",
-        projectId: "{{ config('services.firebase.project_id') ?: env('VITE_FIREBASE_PROJECT_ID') }}",
-        storageBucket: "{{ config('services.firebase.storage_bucket') ?: env('VITE_FIREBASE_STORAGE_BUCKET') }}",
-        messagingSenderId: "{{ config('services.firebase.messaging_sender_id') ?: env('VITE_FIREBASE_MESSAGING_SENDER_ID') }}",
-        appId: "{{ config('services.firebase.app_id') ?: env('VITE_FIREBASE_APP_ID') }}",
+        apiKey: "{{ config('services.firebase.api_key') }}",
+        authDomain: "{{ config('services.firebase.auth_domain') }}",
+        projectId: "{{ config('services.firebase.project_id') }}",
+        storageBucket: "{{ config('services.firebase.storage_bucket') }}",
+        messagingSenderId: "{{ config('services.firebase.messaging_sender_id') }}",
+        appId: "{{ config('services.firebase.app_id') }}",
+        measurementId: "{{ config('services.firebase.measurement_id') }}"
     };
 
     console.log('Firebase Config:', firebaseConfig); // Debug log
