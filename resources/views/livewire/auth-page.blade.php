@@ -37,7 +37,21 @@
                 </div>
 
                 <!-- Form -->
-                <form id="authForm" class="space-y-6" onsubmit="handleAuth(event)" data-view="{{ $view }}">
+                <form id="authForm" method="POST" class="space-y-6" data-view="{{ $view }}">
+                    <!-- Error Display Area -->
+                    <div id="auth-error" class="hidden bg-red-50 border border-red-200 rounded-lg p-4">
+                        <div class="flex">
+                            <div class="flex-shrink-0">
+                                <svg class="h-5 w-5 text-red-400" viewBox="0 0 20 20" fill="currentColor">
+                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd" />
+                                </svg>
+                            </div>
+                            <div class="ml-3">
+                                <p id="auth-error-message" class="text-sm text-red-700"></p>
+                            </div>
+                        </div>
+                    </div>
+                    
                     <!-- Email Input -->
                     <div>
                         <label for="email" class="block mb-2 text-sm font-medium text-gray-700">Email Address</label>
@@ -124,29 +138,64 @@
         }
     }
     
-    // Make function globally accessible for the form
-    window.handleAuth = function(event) {
-        event.preventDefault();
-        console.log('Form submitted');
+    // Robust form handling with proper event listener
+    document.addEventListener('DOMContentLoaded', function() {
+        const authForm = document.getElementById('authForm');
         
-        const email = document.getElementById('email').value;
-        const password = document.getElementById('password').value;
-        const confirmPassword = document.getElementById('confirm_password')?.value;
-        const view = event.target.dataset.view; // 'login' or 'register'
+        if (authForm) {
+            authForm.addEventListener('submit', function(event) {
+                // CRITICAL: Prevent default form submission immediately
+                event.preventDefault();
+                console.log('Form submission intercepted by Firebase handler');
+                
+                const email = document.getElementById('email').value;
+                const password = document.getElementById('password').value;
+                const confirmPassword = document.getElementById('confirm_password')?.value;
+                const view = event.target.dataset.view; // 'login' or 'register'
+                
+                const errorDiv = document.getElementById('auth-error');
+                const errorMessage = document.getElementById('auth-error-message');
+                const submitBtn = document.getElementById('submitBtn');
+                
+                // Hide previous errors
+                errorDiv.classList.add('hidden');
+                
+                // Show loading state
+                if (submitBtn) {
+                    submitBtn.disabled = true;
+                    submitBtn.innerHTML = '<svg class="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>Authenticating...';
+                }
         
-        console.log('Auth attempt:', { email, view });
+                console.log('Auth attempt:', { email, view });
 
-        // Basic validation for registration
-        if (view === 'register' && password !== confirmPassword) {
-            alert('Passwords do not match');
-            return;
-        }
-        
-        // Minimum password length check
-        if (password.length < 6) {
-            alert('Password must be at least 6 characters long');
-            return;
-        }
+                // Basic validation for registration
+                if (view === 'register' && password !== confirmPassword) {
+                    showError('Passwords do not match');
+                    return;
+                }
+                
+                // Minimum password length check
+                if (password.length < 6) {
+                    showError('Password must be at least 6 characters long');
+                    return;
+                }
+                
+                function showError(message) {
+                    errorMessage.textContent = message;
+                    errorDiv.classList.remove('hidden');
+                    resetButton();
+                }
+                
+                function resetButton() {
+                    if (submitBtn) {
+                        submitBtn.disabled = false;
+                        if (view === 'register') {
+                            submitBtn.innerHTML = 'Create Account';
+                        } else {
+                            submitBtn.innerHTML = 'Login';
+                        }
+                    }
+                }
 
         if (view === 'register') {
             console.log('Attempting registration...');
@@ -158,17 +207,17 @@
                 })
                 .catch((error) => {
                     console.error('Registration Error:', error);
-                    let errorMessage = 'Registration failed. Please try again.';
+                    let message = 'Registration failed. Please try again.';
                     
                     if (error.code === 'auth/email-already-in-use') {
-                        errorMessage = 'An account already exists with this email address.';
+                        message = 'An account already exists with this email address.';
                     } else if (error.code === 'auth/weak-password') {
-                        errorMessage = 'Password should be at least 6 characters.';
+                        message = 'Password should be at least 6 characters.';
                     } else if (error.code === 'auth/invalid-email') {
-                        errorMessage = 'Please enter a valid email address.';
+                        message = 'Please enter a valid email address.';
                     }
                     
-                    alert(errorMessage);
+                    showError(message);
                 });
         } else {
             console.log('Attempting login...');
@@ -179,22 +228,24 @@
                 })
                 .catch((error) => {
                     console.error('Login Error:', error);
-                    let errorMessage = 'Login failed. Please try again.';
+                    let message = 'Login failed. Please try again.';
                     
                     if (error.code === 'auth/user-not-found') {
-                        errorMessage = 'No account found with this email address.';
+                        message = 'No account found with this email address.';
                     } else if (error.code === 'auth/wrong-password') {
-                        errorMessage = 'Incorrect password.';
+                        message = 'Incorrect password.';
                     } else if (error.code === 'auth/invalid-email') {
-                        errorMessage = 'Please enter a valid email address.';
+                        message = 'Please enter a valid email address.';
                     } else if (error.code === 'auth/too-many-requests') {
-                        errorMessage = 'Too many failed attempts. Please try again later.';
+                        message = 'Too many failed attempts. Please try again later.';
                     }
                     
-                    alert(errorMessage);
+                    showError(message);
                 });
+            }
+        });
         }
-    }
+    });
 
     window.handleGoogleSignIn = function() {
         console.log('Google sign-in attempted');
@@ -205,15 +256,18 @@
             })
             .catch((error) => {
                 console.error('Google Sign-In Error:', error);
-                let errorMessage = 'Google sign-in failed. Please try again.';
+                let message = 'Google sign-in failed. Please try again.';
                 
                 if (error.code === 'auth/popup-closed-by-user') {
-                    errorMessage = 'Sign-in was cancelled.';
+                    message = 'Sign-in was cancelled.';
                 } else if (error.code === 'auth/popup-blocked') {
-                    errorMessage = 'Pop-up was blocked. Please allow pop-ups for this site.';
+                    message = 'Pop-up was blocked. Please allow pop-ups for this site.';
                 }
                 
-                alert(errorMessage);
+                const errorDiv = document.getElementById('auth-error');
+                const errorMessageEl = document.getElementById('auth-error-message');
+                errorMessageEl.textContent = message;
+                errorDiv.classList.remove('hidden');
             });
     }
 
