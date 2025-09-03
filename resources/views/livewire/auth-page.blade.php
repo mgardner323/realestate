@@ -37,7 +37,7 @@
                 </div>
 
                 <!-- Form -->
-                <form method="POST" id="authForm" class="space-y-6" onsubmit="handleAuth(event)" data-view="{{ $view }}">
+                <form id="authForm" class="space-y-6" onsubmit="handleAuth(event)" data-view="{{ $view }}">
                     <!-- Email Input -->
                     <div>
                         <label for="email" class="block mb-2 text-sm font-medium text-gray-700">Email Address</label>
